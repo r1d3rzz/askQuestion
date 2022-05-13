@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [QuestionController::class,'index']);
+Route::get('/question/detail', [QuestionController::class,'detail']);

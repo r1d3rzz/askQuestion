@@ -10,4 +10,9 @@ class QuestionController extends Controller
     {
         return Inertia::render('Home');
     }
+
+    public function detail()
+    {
+        return Inertia::render('QuestionDetail');
+    }
 }

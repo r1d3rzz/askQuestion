@@ -1,11 +1,22 @@
 <template>
   <div class="home">
-    <h1>Welcome</h1>
+    <Master>
+      <div v-for="item in 3" :key="item">
+        <Questions />
+      </div>
+    </Master>
   </div>
 </template>
 
 <script>
-export default {};
+import Questions from "./Questions";
+import Master from "../Layout/Master";
+export default {
+  components: {
+    Questions,
+    Master,
+  },
+};
 </script>
 
 <style>
