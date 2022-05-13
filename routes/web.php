@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,5 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [QuestionController::class,'index']);
-Route::get('/question/detail', [QuestionController::class,'detail']);
+Route::controller(QuestionController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('/question/detail', 'detail');
+});
+
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/user/create', 'create')->middleware('guest');
+    Route::post('/user/create', 'post_create')->middleware('guest');
+    Route::get('/user/login', 'login')->middleware('guest')->name('/user/login');
+    Route::post('/user/login', 'post_login')->middleware('guest');
+    Route::get('/user/logout', 'logout')->middleware('auth');
+});

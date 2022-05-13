@@ -2,7 +2,7 @@
   <!-- Navbar Section  -->
   <div class="container-fluid mb-3">
     <div class="row">
-      <Navbar />
+      <Navbar :auth_user="auth_user" />
     </div>
   </div>
 
@@ -28,6 +28,7 @@
 import Navbar from "../components/Navbar";
 import Categories from "../components/Categories.vue";
 export default {
+  props: ["auth_user"],
   components: {
     Navbar,
     Categories,

@@ -48,11 +48,6 @@
 
       <!-- Right elements -->
       <div class="d-flex align-items-center">
-        <!-- Icon -->
-        <a class="text-reset me-3" href="#">
-          <i class="fas fa-shopping-cart"></i>
-        </a>
-
         <!-- Notifications -->
         <div class="dropdown">
           <a
@@ -83,8 +78,16 @@
             </li>
           </ul>
         </div>
+
+        <!-- Icon -->
+        <div v-if="!auth_user">
+          <a class="text-reset me-3" href="#">
+            <Link href="/user/login" class="fas fa-sign-in-alt"></Link>
+          </a>
+        </div>
+
         <!-- Avatar -->
-        <div class="dropdown">
+        <div class="dropdown" v-if="auth_user">
           <a
             class="dropdown-toggle d-flex align-items-center hidden-arrow"
             href="#"
@@ -94,7 +97,7 @@
             aria-expanded="false"
           >
             <img
-              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+              :src="/storage/ + auth_user.avatar"
               class="rounded-circle"
               height="25"
               alt="Black and White Portrait of a Man"
@@ -106,13 +109,13 @@
             aria-labelledby="navbarDropdownMenuAvatar"
           >
             <li>
-              <a class="dropdown-item" href="#">My profile</a>
+              <a class="dropdown-item" href="#">{{ auth_user.name }}</a>
             </li>
             <li>
               <a class="dropdown-item" href="#">Settings</a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">Logout</a>
+              <Link class="dropdown-item" href="/user/logout">Logout</Link>
             </li>
           </ul>
         </div>
@@ -121,12 +124,14 @@
     </div>
     <!-- Container wrapper -->
   </nav>
+
   <!-- Navbar -->
 </template>
 
 <script>
 import { Link } from "@inertiajs/inertia-vue3";
 export default {
+  props: ["auth_user"],
   components: { Link },
 };
 </script>
