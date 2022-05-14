@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         auth()->login($user);
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Hello');
     }
 
     public function login()
@@ -46,20 +46,18 @@ class AuthController extends Controller
         ]);
 
         if (auth()->attempt($fromData)) {
-            return redirect('/');
+            return redirect('/')->with('success', 'Welcome Back');
         } else {
             return back()->withErrors([
                 'password' => 'Wrong Email or Password'
             ]);
         }
-
-        dd($fromData);
     }
 
     public function logout()
     {
         auth()->logout();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'GoodBye');
     }
 }
