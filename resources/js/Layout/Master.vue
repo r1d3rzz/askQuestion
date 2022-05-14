@@ -14,7 +14,7 @@
           <button class="btn btn-primary">Ask Question</button>
         </div>
         <div class="mt-2">
-          <Categories />
+          <Categories :categories="categories" />
         </div>
       </div>
       <div class="col-md-9">
@@ -28,7 +28,7 @@
 import Navbar from "../components/Navbar";
 import Categories from "../components/Categories.vue";
 export default {
-  props: ["auth_user"],
+  props: ["auth_user", "categories"],
   components: {
     Navbar,
     Categories,

@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <Master :auth_user="auth_user">
-      <div v-for="item in 3" :key="item">
-        <Questions />
+    <Master :auth_user="auth_user" :categories="categories">
+      <div v-for="question in questions" :key="question.id">
+        <Questions :question="question" :auth_user="auth_user" />
       </div>
     </Master>
   </div>
@@ -12,7 +12,7 @@
 import Questions from "./Questions";
 import Master from "../Layout/Master";
 export default {
-  props: ["auth_user"],
+  props: ["auth_user", "categories", "questions"],
   components: {
     Questions,
     Master,

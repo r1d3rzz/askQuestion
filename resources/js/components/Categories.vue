@@ -5,17 +5,22 @@
         <h3>Category Lists</h3>
       </div>
       <div class="card-body">
-        <a class="list-group-item" href="#">Test 1</a>
-        <a class="list-group-item" href="#">Test 2</a>
-        <a class="list-group-item" href="#">Test 3</a>
+        <span v-for="category in categories" :key="category.id">
+          <Link class="list-group-item" :href="category.slug"
+            >{{ category.name }}
+          </Link>
+        </span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { Link } from "@inertiajs/inertia-vue3";
+export default {
+  props: ["categories"],
+  components: { Link },
+};
 </script>
-
 <style>
 </style>

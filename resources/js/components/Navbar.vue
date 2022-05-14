@@ -33,7 +33,7 @@
             <Link class="nav-link" href="/">Discussion</Link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Questions</a>
+            <Link class="nav-link" href="/">Questions</Link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Answered Questions</a>
