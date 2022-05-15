@@ -18,8 +18,18 @@ class QuestionController extends Controller
         ]);
     }
 
-    public function detail()
+    public function detail($slug)
     {
-        return Inertia::render('QuestionDetail');
+        $question = Question::with('category')->firstWhere('slug', $slug);
+        return Inertia::render('QuestionDetail', [
+            'question' => $question,
+            'categories' => Category::latest()->get(),
+            'auth_user' => Auth::user(),
+        ]);
+    }
+
+    public function category($slug)
+    {
+        dd($slug);
     }
 }

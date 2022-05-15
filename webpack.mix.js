@@ -17,3 +17,10 @@ mix.js("resources/js/app.js", "public/js")
     .postCss("resources/css/app.css", "public/css", [
         //
     ]);
+
+// Mix v6
+const path = require("path");
+
+mix.alias({
+    ziggy: path.resolve("vendor/tightenco/ziggy/dist"), // or 'vendor/tightenco/ziggy/dist/vue' if you're using the Vue plugin
+});

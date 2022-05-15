@@ -6,7 +6,9 @@
       </div>
       <div class="card-body">
         <span v-for="category in categories" :key="category.id">
-          <Link class="list-group-item" :href="category.slug"
+          <Link
+            class="list-group-item"
+            :href="route('category.name', category.slug)"
             >{{ category.name }}
           </Link>
         </span>

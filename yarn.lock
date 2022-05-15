@@ -4275,6 +4275,11 @@ qs@6.10.3, qs@^6.9.0:
   dependencies:
     side-channel "^1.0.4"
 
+qs@~6.9.7:
+  version "6.9.7"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.7.tgz#4610846871485e1e048f44ae3b94033f0e675afe"
+  integrity sha512-IhMFgUmuNpyRfxA90umL7ByLlgRXu6tIfKPpF5TmcfRLlLCckfP/g3IQmju6jjpu+Hh8rA+2p6A27ZSPOOHdKw==
+
 querystring-es3@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/querystring-es3/-/querystring-es3-0.2.1.tgz#9ec61f79049875707d69414596fd907a4d711e73"
@@ -5322,3 +5327,10 @@ yargs@^17.2.1:
     string-width "^4.2.3"
     y18n "^5.0.5"
     yargs-parser "^21.0.0"
+
+ziggy-js@^1.4.6:
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/ziggy-js/-/ziggy-js-1.4.6.tgz#1b4bd0a9813fd833e7f14e0c354c40af8cd3ab8a"
+  integrity sha512-7bnzm+I9bDnlh98km8d43X8r99YXTfSbcIVWRRWZFBw+vtck3bhvUDmuvNoC/G7smblb0CFEFwwxZ+H0hLa1DA==
+  dependencies:
+    qs "~6.9.7"
