@@ -34,9 +34,11 @@
             </span>
 
             <span class="d-block d-lg-inline">
-              <span class="badge badge-white bg-dark me-2">{{
-                question.category.name
-              }}</span>
+              <Link :href="'/?category=' + question.category.slug"
+                ><span class="badge badge-white bg-dark me-2">{{
+                  question.category.name
+                }}</span></Link
+              >
             </span>
           </div>
           <div>

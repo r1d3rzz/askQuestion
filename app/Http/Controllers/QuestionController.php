@@ -11,11 +11,20 @@ class QuestionController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Home', [
+        $questions = [
             'auth_user' => Auth::user(),
             'categories' => Category::latest()->get(),
             'questions' => Question::with('category')->get(),
-        ]);
+        ];
+
+        if ($slug = request('category')) {
+            $category = Category::where('slug', $slug)->first();
+            $questions['questions'] = $category->questions()->with('category')->get();
+
+            return Inertia::render('Home', $questions);
+        }
+
+        return Inertia::render('Home', $questions);
     }
 
     public function detail($slug)
@@ -26,10 +35,5 @@ class QuestionController extends Controller
             'categories' => Category::latest()->get(),
             'auth_user' => Auth::user(),
         ]);
-    }
-
-    public function category($slug)
-    {
-        dd($slug);
     }
 }
