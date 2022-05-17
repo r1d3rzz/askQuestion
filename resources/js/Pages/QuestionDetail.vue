@@ -35,8 +35,25 @@
                 "
               >
                 <div>
-                  <span class="me-2"
-                    ><i class="far fa-heart text-danger"></i> 10
+                  <span class="me-2">
+                    <!--user like -->
+                    <span v-if="auth_user">
+                      <i
+                        v-if="isLike(auth_user.id) === 'false'"
+                        class="far fa-heart text-danger"
+                      ></i>
+                      <i
+                        v-if="isLike(auth_user.id) === 'true'"
+                        class="fas fa-heart text-danger"
+                      ></i>
+                    </span>
+                    <span v-else>
+                      <i class="far fa-heart text-danger"></i>
+                    </span>
+                    <!-- end user like -->
+                    <span v-if="question.like_users.length" class="ms-1">
+                      {{ question.like_users.length }}
+                    </span>
                   </span>
                   <span class="me-2"
                     ><i class="far fa-comment text-primary"></i> 5
@@ -76,6 +93,22 @@ export default {
   components: {
     Comments,
     Master,
+  },
+  setup(props) {
+    let users = [];
+    props.question.like_users.forEach((user) => {
+      users.push(user.id);
+    });
+
+    let isLike = (user_id) => {
+      if (users.includes(user_id)) {
+        return "true";
+      } else {
+        return "false";
+      }
+    };
+
+    return { isLike };
   },
 };
 </script>

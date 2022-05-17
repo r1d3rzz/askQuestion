@@ -22,9 +22,30 @@
         >
           <div>
             <span class="me-3">
-              <span class="me-2"
-                ><i class="far fa-heart text-danger"></i> 10
+              <!--qestion like user -->
+              <span class="me-2">
+                <span v-if="auth_user">
+                  <i
+                    v-if="isLike(auth_user.id) == 'false'"
+                    class="far fa-heart text-danger"
+                  ></i>
+                  <i
+                    v-if="isLike(auth_user.id) == 'true'"
+                    class="fas fa-heart text-danger"
+                  ></i>
+                </span>
+                <span v-else>
+                  <span>
+                    <i class="far fa-heart text-danger"></i>
+                  </span>
+                </span>
+
+                <span v-if="question.like_users.length" class="ms-1">{{
+                  question.like_users.length
+                }}</span>
               </span>
+              <!--end qestion like user -->
+
               <span class="me-2"
                 ><i class="far fa-comment text-primary"></i> 5
               </span>
@@ -59,6 +80,22 @@ import { Link } from "@inertiajs/inertia-vue3";
 export default {
   props: ["question", "auth_user"],
   components: { Link },
+  setup(props) {
+    let likeUsers = [];
+    props.question.like_users.forEach((user) => {
+      likeUsers.push(user.id);
+    });
+
+    let isLike = (user_id) => {
+      if (likeUsers.includes(user_id)) {
+        return "true";
+      } else {
+        return "false";
+      }
+    };
+
+    return { isLike };
+  },
 };
 </script>
 

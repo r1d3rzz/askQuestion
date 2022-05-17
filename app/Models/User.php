@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function likeQuestions()
+    {
+        return $this->belongsToMany(Question::class);
+    }
 }

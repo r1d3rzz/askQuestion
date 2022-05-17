@@ -14,12 +14,14 @@ class QuestionController extends Controller
         $questions = [
             'auth_user' => Auth::user(),
             'categories' => Category::latest()->get(),
-            'questions' => Question::with('category')->get(),
+            'questions' => Question::with('category', 'likeUsers')->get(),
         ];
+
+        // return $questions;
 
         if ($slug = request('category')) {
             $category = Category::where('slug', $slug)->first();
-            $questions['questions'] = $category->questions()->with('category')->get();
+            $questions['questions'] = $category->questions()->with('category', 'likeUsers')->get();
 
             return Inertia::render('Home', $questions);
         }
@@ -29,7 +31,8 @@ class QuestionController extends Controller
 
     public function detail($slug)
     {
-        $question = Question::with('category')->firstWhere('slug', $slug);
+        $question = Question::with('category', 'likeUsers')->firstWhere('slug', $slug);
+
         return Inertia::render('QuestionDetail', [
             'question' => $question,
             'categories' => Category::latest()->get(),

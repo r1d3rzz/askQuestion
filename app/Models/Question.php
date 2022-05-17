@@ -13,4 +13,9 @@ class Question extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function likeUsers()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
