@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Question;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -38,5 +39,18 @@ class QuestionController extends Controller
             'categories' => Category::latest()->get(),
             'auth_user' => Auth::user(),
         ]);
+    }
+
+    public function likeBtn($question_id)
+    {
+        $question = Question::firstWhere('id', $question_id);
+
+        if (User::find(auth()->id())->isLike($question->id)) {
+            $question->unLike();
+        } else {
+            $question->like();
+        }
+
+        return back();
     }
 }

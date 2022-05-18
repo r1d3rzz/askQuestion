@@ -18,4 +18,14 @@ class Question extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function unLike()
+    {
+        return $this->likeUsers()->detach(auth()->id());
+    }
+
+    public function like()
+    {
+        return $this->likeUsers()->attach(auth()->id());
+    }
 }

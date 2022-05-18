@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(QuestionController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/question/{slug}/detail', 'detail')->name('question.detail');
+    Route::post('/question/{question_id}/like', 'likeBtn');
 });
 
 Route::controller(AuthController::class)->group(function () {

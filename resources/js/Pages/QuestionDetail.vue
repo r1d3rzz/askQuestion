@@ -39,12 +39,11 @@
                     <!--user like -->
                     <span v-if="auth_user">
                       <i
-                        v-if="isLike(auth_user.id) === 'false'"
-                        class="far fa-heart text-danger"
-                      ></i>
-                      <i
-                        v-if="isLike(auth_user.id) === 'true'"
-                        class="fas fa-heart text-danger"
+                        :class="[
+                          isLike(auth_user.id) == userIsLike ? 'far' : 'fas',
+                        ]"
+                        class="fa-heart text-danger"
+                        @click="likeBtn(question.id)"
                       ></i>
                     </span>
                     <span v-else>
@@ -88,6 +87,8 @@
 <script>
 import Comments from "./Comments";
 import Master from "../Layout/Master";
+import { ref } from "@vue/reactivity";
+import { Inertia } from "@inertiajs/inertia";
 export default {
   props: ["question", "auth_user", "categories"],
   components: {
@@ -96,6 +97,8 @@ export default {
   },
   setup(props) {
     let users = [];
+    let userIsLike = ref("false");
+
     props.question.like_users.forEach((user) => {
       users.push(user.id);
     });
@@ -108,7 +111,16 @@ export default {
       }
     };
 
-    return { isLike };
+    let likeBtn = (question_id) => {
+      if (userIsLike.value == "true") {
+        userIsLike.value = "false";
+      } else {
+        userIsLike.value = "true";
+      }
+      Inertia.post("/question/" + question_id + "/like");
+    };
+
+    return { isLike, userIsLike, likeBtn };
   },
 };
 </script>
