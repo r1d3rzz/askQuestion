@@ -46,7 +46,10 @@
               <!--end qestion like user -->
 
               <span class="me-2"
-                ><i class="far fa-comment text-primary"></i> 5
+                ><i class="far fa-comment text-primary"></i>
+                <span v-if="question.comments.length" class="ms-1">{{
+                  question.comments.length
+                }}</span>
               </span>
               <span class="me-2"
                 ><i class="far fa-star text-warning"></i> 1
