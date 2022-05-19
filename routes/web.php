@@ -19,6 +19,7 @@ Route::controller(QuestionController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/question/{slug}/detail', 'detail')->name('question.detail');
     Route::post('/question/{question_id}/like', 'likeBtn');
+    Route::post('/question/comment/{question_id}', 'post_comment');
 });
 
 Route::controller(AuthController::class)->group(function () {

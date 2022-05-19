@@ -73,11 +73,39 @@
             <p>
               {{ question.body }}
             </p>
+
+            <div>
+              <div v-if="auth_user">
+                <form @submit.prevent="sendComment">
+                  <textarea
+                    rows="5"
+                    class="form-control"
+                    placeholder="comment your answer here"
+                    v-model="form.comment"
+                    required
+                  ></textarea>
+                  <small class="text-danger">{{ errors.comment }}</small>
+                  <div class="mt-2 d-flex justify-content-end">
+                    <input
+                      type="submit"
+                      value="comment"
+                      class="btn btn-sm btn-primary"
+                    />
+                  </div>
+                </form>
+              </div>
+              <div v-else class="text-center py-2 text-muted">
+                <small
+                  >If You want to suggest this question.Please
+                  <Link href="/user/login">Login</Link> first.</small
+                >
+              </div>
+            </div>
           </div>
         </div>
 
         <!--comments-->
-        <Comments />
+        <Comments :comments="question.comments" />
         <!--emd comments-->
       </div>
     </div>
@@ -89,11 +117,13 @@ import Comments from "./Comments";
 import Master from "../Layout/Master";
 import { ref } from "@vue/reactivity";
 import { Inertia } from "@inertiajs/inertia";
+import { useForm, Link } from "@inertiajs/inertia-vue3";
 export default {
-  props: ["question", "auth_user", "categories"],
+  props: ["question", "auth_user", "categories", "errors"],
   components: {
     Comments,
     Master,
+    Link,
   },
   setup(props) {
     let users = [];
@@ -120,7 +150,16 @@ export default {
       Inertia.post("/question/" + question_id + "/like");
     };
 
-    return { isLike, userIsLike, likeBtn };
+    const form = useForm({
+      comment: null,
+    });
+
+    let sendComment = () => {
+      Inertia.post("/question/comment/" + props.question.id, form);
+      form.comment = "";
+    };
+
+    return { isLike, userIsLike, likeBtn, sendComment, form };
   },
 };
 </script>

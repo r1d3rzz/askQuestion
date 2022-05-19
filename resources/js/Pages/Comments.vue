@@ -1,21 +1,21 @@
 <template>
   <div class="mt-">
-    <h5 class="text-muted mb-3">Comments (3)</h5>
-    <div v-for="item in 3" :key="item">
+    <h5 class="text-muted mb-3" v-if="comments.length">
+      Comments ({{ comments.length }})
+    </h5>
+    <div v-for="comment in comments" :key="comment.id">
       <div class="card mb-3">
         <div class="card-header bg-dark text-white">
           <img
-            src="https://i.pravatar.cc/150?u=fake@pravatar.com"
+            :src="'/storage/' + comment.author.avatar"
             width="40"
             class="rounded-circle me-3"
             alt=""
           />
-          <span>User Name</span>
+          <span>{{ comment.author.name }}</span>
         </div>
         <div class="card-body">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse
-          corporis debitis sint ducimus quam numquam, cumque ex ea labore
-          itaque.
+          {{ comment.body }}
         </div>
       </div>
     </div>
@@ -23,7 +23,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["comments"],
+};
 </script>
 
 <style>

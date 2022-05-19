@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Question;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,7 @@ class QuestionController extends Controller
 
     public function detail($slug)
     {
-        $question = Question::with('category', 'likeUsers')->firstWhere('slug', $slug);
+        $question = Question::with('category', 'likeUsers', 'comments.author')->firstWhere('slug', $slug);
 
         return Inertia::render('QuestionDetail', [
             'question' => $question,
@@ -50,6 +51,21 @@ class QuestionController extends Controller
         } else {
             $question->like();
         }
+
+        return back();
+    }
+
+    public function post_comment($question_id)
+    {
+        request()->validate([
+            'comment' => ['required','min:3']
+        ]);
+
+        Comment::create([
+            'user_id' => Auth::id(),
+            'question_id' => $question_id,
+            'body' => request('comment')
+        ]);
 
         return back();
     }

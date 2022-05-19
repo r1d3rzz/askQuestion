@@ -28,4 +28,9 @@ class Question extends Model
     {
         return $this->likeUsers()->attach(auth()->id());
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
