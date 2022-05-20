@@ -8,7 +8,11 @@
       <div v-if="auth_user">
         <div v-if="auth_user.id === question.user_id">
           <span class="badge badge-white bg-warning me-2">fixed</span>
-          <span class="badge badge-white bg-danger me-2">delete</span>
+          <span
+            class="badge badge-white bg-danger me-2 deleteBtn"
+            @click="deleteQuestion(question.id)"
+            >delete</span
+          >
         </div>
       </div>
     </div>
@@ -110,10 +114,18 @@ export default {
       Inertia.post("/question/" + question_id + "/like");
     };
 
-    return { isLike, likeBtn, userIsLike };
+    let deleteQuestion = (question_id) => {
+      Inertia.post("/question/" + question_id + "/delete");
+    };
+
+    return { isLike, likeBtn, userIsLike, deleteQuestion };
   },
 };
 </script>
 
 <style>
+.deleteBtn {
+  cursor: pointer;
+  user-select: none;
+}
 </style>

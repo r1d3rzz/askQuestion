@@ -2,7 +2,7 @@
   <div class="categories">
     <div class="card">
       <div class="card-header text-center">
-        <h3>Category Lists</h3>
+        <p>Category Lists</p>
       </div>
       <div class="card-body">
         <span v-for="category in categories" :key="category.id">

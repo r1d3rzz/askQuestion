@@ -124,13 +124,6 @@
     </div>
     <!-- Container wrapper -->
   </nav>
-
-  <div v-if="success">
-    <div class="alert alert-primary text-center">
-      {{ success }} <span v-if="auth_user">{{ auth_user.name }}</span>
-    </div>
-  </div>
-
   <!-- Navbar -->
 </template>
 
@@ -138,13 +131,8 @@
 import { Link, usePage } from "@inertiajs/inertia-vue3";
 import { computed } from "@vue/runtime-core";
 export default {
-  props: ["auth_user", "success"],
+  props: ["auth_user"],
   components: { Link },
-  setup() {
-    const success = computed((_) => usePage().props.value.success);
-
-    return { success };
-  },
 };
 </script>
 

@@ -7,6 +7,8 @@ use App\Models\Comment;
 use App\Models\Question;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class QuestionController extends Controller
@@ -16,12 +18,12 @@ class QuestionController extends Controller
         $questions = [
             'auth_user' => Auth::user(),
             'categories' => Category::latest()->get(),
-            'questions' => Question::with('category', 'likeUsers', 'comments')->paginate(2),
+            'questions' => Question::with('category', 'likeUsers', 'comments')->latest()->paginate(4),
         ];
 
         if ($slug = request('category')) {
             $category = Category::where('slug', $slug)->first();
-            $questions['questions'] = $category->questions()->with('category', 'likeUsers', 'comments')->paginate(2)->withQueryString();
+            $questions['questions'] = $category->questions()->with('category', 'likeUsers', 'comments')->latest()->paginate(2)->withQueryString();
 
             return Inertia::render('Home', $questions);
         }
@@ -66,5 +68,20 @@ class QuestionController extends Controller
         ]);
 
         return back();
+    }
+
+    public function create()
+    {
+        return Inertia::render('Questions/Create', [
+            'auth_user' => auth()->user(),
+            'categories' => Category::latest()->get()
+        ]);
+    }
+
+    public function destroy($question_id)
+    {
+        DB::table('questions')->where('id', $question_id)->delete();
+
+        return back()->with('danger', 'delete successfully');
     }
 }

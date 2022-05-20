@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,12 @@ Route::controller(QuestionController::class)->group(function () {
     Route::get('/question/{slug}/detail', 'detail')->name('question.detail');
     Route::post('/question/{question_id}/like', 'likeBtn');
     Route::post('/question/comment/{question_id}', 'post_comment');
+    Route::get('/question/create', 'create')->middleware('auth');
+    Route::post('/question/{question_id}/delete', 'destroy');
+});
+
+Route::controller(CategoryController::class)->group(function () {
+    Route::post('/question/category/store', 'store');
 });
 
 Route::controller(AuthController::class)->group(function () {
