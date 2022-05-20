@@ -1,7 +1,7 @@
 <template>
   <div class="categories">
     <div class="card">
-      <div class="card-header">
+      <div class="card-header text-center">
         <h3>Category Lists</h3>
       </div>
       <div class="card-body">

@@ -112,7 +112,7 @@
               <a class="dropdown-item" href="#">{{ auth_user.name }}</a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">Settings</a>
+              <Link class="dropdown-item" href="user/setting">Settings</Link>
             </li>
             <li>
               <Link class="dropdown-item" href="/user/logout">Logout</Link>

@@ -28,4 +28,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/user/login', 'login')->middleware('guest')->name('/user/login');
     Route::post('/user/login', 'post_login')->middleware('guest');
     Route::get('/user/logout', 'logout')->middleware('auth');
+    Route::get('/user/setting', 'setting')->middleware('auth');
+    Route::post('/user/profile/edit/{user_id}', 'user_update')->middleware('auth');
 });
