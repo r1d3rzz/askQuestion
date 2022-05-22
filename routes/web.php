@@ -23,6 +23,7 @@ Route::controller(QuestionController::class)->group(function () {
     Route::post('/question/comment/{question_id}', 'post_comment');
     Route::get('/question/create', 'create')->middleware('auth');
     Route::post('/question/{question_id}/delete', 'destroy');
+    Route::post('/question/store', 'store');
 });
 
 Route::controller(CategoryController::class)->group(function () {

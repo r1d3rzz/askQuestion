@@ -78,6 +78,22 @@ class QuestionController extends Controller
         ]);
     }
 
+    public function store()
+    {
+        $formData = request()->validate([
+            'title' => ['required','min:5'],
+            'slug' => ['required',Rule::unique('questions', 'slug')],
+            'body' => ['required','min:5'],
+            'category_id' => ['required',Rule::exists('categories', 'id')],
+        ]);
+
+        $formData['user_id'] = auth()->id();
+
+        Question::create($formData);
+
+        return back()->with('create_success', $formData['title'].' Uploaded successfully');
+    }
+
     public function destroy($question_id)
     {
         DB::table('questions')->where('id', $question_id)->delete();

@@ -11,7 +11,9 @@
     <div class="row">
       <div class="col-md-3">
         <div class="row">
-          <button class="btn btn-primary">Ask Question</button>
+          <Link href="/question/create" class="btn btn-primary"
+            >Ask Question</Link
+          >
         </div>
         <div class="mt-2">
           <div class="categories">

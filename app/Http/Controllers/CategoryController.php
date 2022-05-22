@@ -10,12 +10,15 @@ class CategoryController extends Controller
 {
     public function store()
     {
-        $formData = request()->validate([
+        request()->validate([
             'name' => ['required','min:2',Rule::unique('categories', 'name')],
-            'slug' => ['required','min:2',Rule::unique('categories', 'slug')],
+            'c_slug' => ['required','min:2',Rule::unique('categories', 'slug')],
         ]);
 
-        Category::create($formData);
+        Category::create([
+            'name' => request('name'),
+            'slug' => request('c_slug')
+        ]);
         return back()->with('create_success', request('name')." is create successfully");
     }
 }
