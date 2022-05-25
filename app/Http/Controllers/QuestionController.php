@@ -17,7 +17,7 @@ class QuestionController extends Controller
     {
         $questions = [
             'auth_user' => Auth::user(),
-            'categories' => Category::latest()->get(),
+            'categories' => Question::with('category')->latest()->get(),
             'questions' => Question::with('category', 'likeUsers', 'comments')->latest()->paginate(4),
         ];
 

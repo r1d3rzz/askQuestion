@@ -1,5 +1,5 @@
 <template>
-  <Master :auth_user="auth_user" :categories="categories">
+  <AskQuestion :auth_user="auth_user" :categories="categories">
     <div class="create">
       <div class="card">
         <div class="card-header">
@@ -115,17 +115,21 @@
         </div>
       </div>
     </div>
-  </Master>
+  </AskQuestion>
 </template>
 
 <script>
+import AskQuestion from "../../Layout/AskQuestion";
 import { useForm } from "@inertiajs/inertia-vue3";
 import Master from "../../Layout/Master";
 import { Inertia } from "@inertiajs/inertia";
 import { ref } from "@vue/reactivity";
 export default {
   props: ["auth_user", "categories", "errors"],
-  components: { Master },
+  components: {
+    AskQuestion,
+    Master,
+  },
   setup() {
     const c_form = useForm({
       name: null,

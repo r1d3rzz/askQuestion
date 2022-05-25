@@ -5,9 +5,9 @@
         <p>Category Lists</p>
       </div>
       <div class="card-body">
-        <span v-for="category in categories" :key="category.id">
-          <Link class="list-group-item" :href="'/?category=' + category.slug"
-            >{{ category.name }}
+        <span v-for="category in uniqueCategories" :key="category">
+          <Link class="list-group-item" :href="'/?category=' + category"
+            >{{ category }}
           </Link>
         </span>
       </div>
@@ -20,6 +20,18 @@ import { Link } from "@inertiajs/inertia-vue3";
 export default {
   props: ["categories"],
   components: { Link },
+  setup(props) {
+    let categories = [];
+    props.categories.forEach((category) => {
+      categories.push(category.category.name);
+    });
+
+    let uniqueCategories = categories.filter((category, index, array) => {
+      return array.indexOf(category) === index;
+    });
+
+    return { uniqueCategories };
+  },
 };
 </script>
 <style>
