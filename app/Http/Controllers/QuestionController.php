@@ -37,7 +37,7 @@ class QuestionController extends Controller
 
         return Inertia::render('QuestionDetail', [
             'question' => $question,
-            'categories' => Category::latest()->get(),
+            'categories' => Question::with('category')->latest()->get(),
             'auth_user' => Auth::user(),
         ]);
     }
@@ -98,6 +98,14 @@ class QuestionController extends Controller
     {
         DB::table('questions')->where('id', $question_id)->delete();
 
-        return back()->with('danger', 'delete successfully');
+        return redirect('/')->with('danger', 'delete successfully');
+    }
+
+    public function user_questions()
+    {
+        return Inertia::render('Questions/UserQuestions', [
+            'questions' => auth()->user()->questions,
+            'auth_user' => auth()->user()
+        ]);
     }
 }

@@ -19,7 +19,11 @@
             <div v-if="auth_user">
               <div v-if="auth_user.id === question.user_id">
                 <span class="badge badge-white bg-warning me-2">fixed</span>
-                <span class="badge badge-white bg-danger me-2">delete</span>
+                <span
+                  @click="deleteQuestion(question.id)"
+                  class="badge badge-white bg-danger me-2 deleteBtn"
+                  >delete</span
+                >
               </div>
             </div>
           </div>
@@ -91,7 +95,7 @@
                   <div class="mt-2 d-flex justify-content-end">
                     <input
                       type="submit"
-                      value="comment"
+                      value="Your Answer"
                       class="btn btn-sm btn-primary"
                     />
                   </div>
@@ -162,10 +166,18 @@ export default {
       form.comment = "";
     };
 
-    return { isLike, userIsLike, likeBtn, sendComment, form };
+    let deleteQuestion = (id) => {
+      Inertia.post("/question/" + id + "/delete");
+    };
+
+    return { isLike, userIsLike, likeBtn, sendComment, form, deleteQuestion };
   },
 };
 </script>
 
 <style>
+.deleteBtn {
+  user-select: none;
+  cursor: pointer;
+}
 </style>

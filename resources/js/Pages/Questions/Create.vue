@@ -145,10 +145,16 @@ export default {
 
     let createQuestion = () => {
       Inertia.post("/question/store", q_form);
+      q_form.title = "";
+      q_form.slug = "";
+      q_form.body = "";
+      q_form.category_id = "";
     };
 
     let createCateory = () => {
       Inertia.post("/question/category/store", c_form);
+      c_form.name = "";
+      c_form.c_slug = "";
     };
 
     return { createCateory, c_form, createQuestion, q_form };

@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return auth()->user()->likeQuestions && auth()->user()->likeQuestions->contains('id', $question_id);
     }
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
 }

@@ -25,7 +25,9 @@
                 <Link href="/user/setting" class="list-group-item"
                   >Edit Profile</Link
                 >
-                <a href="#" class="list-group-item">Your Questions</a>
+                <Link href="/user/questions" class="list-group-item"
+                  >Your Questions</Link
+                >
                 <a href="#" class="list-group-item">Save Questions</a>
               </div>
             </div>

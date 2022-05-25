@@ -1,7 +1,7 @@
 <template>
   <div class="mt-">
     <h5 class="text-muted mb-3" v-if="comments.length">
-      Comments ({{ comments.length }})
+      Answers ({{ comments.length }})
     </h5>
     <div v-for="comment in comments" :key="comment.id">
       <div class="card mb-3">

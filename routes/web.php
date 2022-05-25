@@ -24,6 +24,7 @@ Route::controller(QuestionController::class)->group(function () {
     Route::get('/question/create', 'create')->middleware('auth');
     Route::post('/question/{question_id}/delete', 'destroy');
     Route::post('/question/store', 'store');
+    Route::get('/user/questions', 'user_questions')->middleware('auth');
 });
 
 Route::controller(CategoryController::class)->group(function () {
